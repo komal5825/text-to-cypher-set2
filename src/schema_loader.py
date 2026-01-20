@@ -20,11 +20,12 @@ from dotenv import load_dotenv
 load_dotenv()
 _SCHEMA_PATH = Path(os.environ["NEO4J_SCHEMA_PATH"]).expanduser().resolve()
 _HINTS_PATH = Path(os.environ.get("SCHEMA_HINTS_PATH")).expanduser().resolve()
+#_HINTS_PATH = None
 
 # ── internal cache --------------------------------------------------------
 _cached_schema: Dict[str, Any] | None = None
 _cached_hints: Dict[str, Any] | None = None
-_hints_loaded: bool = False
+_hints_loaded: bool = True
 
 def get_schema() -> Dict[str, Any]:
     """Return the Neo4j schema as a JSON dict (cached)."""
@@ -42,4 +43,5 @@ def get_schema_hints() -> Optional[Dict[str, Any]]:
         if _HINTS_PATH and _HINTS_PATH.exists():
             with _HINTS_PATH.open() as f:
                 _cached_hints = json.load(f)
-    return _cached_hints
+    return 
+    
