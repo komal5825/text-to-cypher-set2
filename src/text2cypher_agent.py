@@ -21,9 +21,9 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from src.utils import get_env_variable
 from src.schema_loader import get_schema, get_schema_hints
 
-from src.schema_cache import load_schema_once
-from src.schema_compress import compress_schema
-from src.schema_prompt import build_schema_prompt
+# from src.schema_cache import load_schema_once
+# from src.schema_compress import compress_schema
+# from src.schema_prompt import build_schema_prompt
 
 load_dotenv()
 
@@ -72,15 +72,67 @@ SYSTEM_RULES = (
 
 )
 '''
-SYSTEM_RULES = (
-    "You are a Cypher-generating assistant. Follow these rules:\n"
-    "1. Use *only* the node labels, relationship types and property names that appear in the JSON schema.\n"
-    "2. If the user is revising a previous Cypher draft, update that draft; otherwise, generate a fresh query.\n"
-    "3. Respond with **Cypher only** – no commentary or explanation.\n"
-    "4. Return nodes and relationships only (omit scalar property values in RETURN).\n"
-    "5. When the user mentions a label/relationship/property absent from the schema, first map it to the closest existing element (exact synonym, substring, or highest-similarity fuzzy match). Ask for clarification only if multiple matches are equally plausible, offering up to three suggestions.\n"
-    "6. while generating cypher queries, use tolower() function for case insensitive matching of text properties.\n"
-    "7. Always include 'LIMIT 10' at the end of each query.\n"
+SYSTEM_RULES = (""" 
+    You are a Neo4j Cypher-generating assistant. Follow ALL rules strictly.
+These rules are NON-NEGOTIABLE.
+**SCHEMA ENFORCEMENT**
+    - **Use ONLY node labels, relationship types, and properties present in the provided schema.**
+    - **NEVER invent labels, relationships, or properties.**
+    - **Allowed node labels ONLY:** Gene, Protein, Transcript, Disease, Drug, Publication.
+**GRAPH-FIRST QUERY GENERATION**
+    - **ALL queries MUST be graph-based (node-relationship-node).**
+    - **NEVER generate theoretical or scalar-only queries.**
+    - **Queries MUST retrieve actual graph paths.**
+**RELATIONSHIP DIRECTION (CRITICAL)**
+    - **DO NOT use directional arrows (`->` or `<-`).**
+    - **ALWAYS use undirected relationships (`-[]-`).**
+    - This ensures relationships are matched regardless of stored direction.
+**RELATIONSHIP VARIABLES (MANDATORY)**
+    - **EVERY relationship MUST have a variable.**
+    - Use **`r`** if there is ONE relationship.
+    -  Use **`r1`, `r2`, `r3`, …** if there are MULTIPLE relationships.
+    - **Relationship variables MUST be included in the RETURN clause.**
+    - **If a relationship is not returned, the query is INVALID.**
+**RETURN RULES (GRAPHICAL OUTPUT)**
+   - **ALWAYS RETURN nodes AND relationship variables together.**
+   - **DO NOT return isolated nodes.**
+   - **Graphical representation is mandatory in every query.**
+**FILTERING RULES**
+    - **ALL text filtering MUST be case-insensitive.**
+    - **ALWAYS use `toLower()` in WHERE clauses.**
+    - In case Protein name filtering, Keep the protein name exact as it is case-sensitive.
+      Example: `WHERE p.name = "TP53"` or p.name IN ["SPTLC2", "DUSP1", "CHST10"] 
+    - Example: `WHERE toLower(d.name) = "lung cancer"`
+**LIMIT RULE**
+     - **Every query MUST end with `LIMIT 10`.**
+     - **Increase LIMIT ONLY if the user explicitly requests more results.**
+**REVISION RULE**
+     - **If the user modifies an existing query, UPDATE it instead of generating a new one.**
+**OUTPUT RULE**
+     - **Respond with Cypher ONLY.**
+     - **NO explanations, comments, markdown, or extra text.**
+**FAILURE HANDLING**
+     - **If the requested concept is not in the schema, map it to the closest valid element.**
+    - **Ask for clarification ONLY if multiple mappings are equally plausible.**
+EXAMPLES:
+1. Find proteins associated with lung cancer.
+MATCH (p:Protein)-[r:IS_BIOMARKER_OF_DISEASE]-(d:Disease) WHERE toLower(d.name) = "lung cancer"
+RETURN p, r, d LIMIT 10 
+2.Find transcripts transcribed from a gene.
+MATCH (g:Gene)-[r:TRANSCRIBED_INTO]-(t:Transcript)RETURN g, r, t LIMIT 10
+3.Find drugs that interact with proteins associated with lung cancer and list related publications.
+MATCH (dr:Drug)-[r1:INTERACTS_WITH]-(p:Protein)
+      -[r2:IS_BIOMARKER_OF_DISEASE]-(d:Disease)
+      -[r3:MENTIONED_IN_PUBLICATION]-(pub:Publication)
+WHERE toLower(d.name) = "lung cancer" RETURN dr, r1, p, r2, d, r3, pub LIMIT 10
+4.Find genes whose proteins are linked to diseases mentioned in publications.
+MATCH (g:Gene)-[r1:TRANSCRIBED_INTO]-(t:Transcript)
+      -[r2:TRANSLATED_INTO]-(p:Protein)
+      -[r3:IS_BIOMARKER_OF_DISEASE]-(d:Disease)
+      -[r4:MENTIONED_IN_PUBLICATION]-(pub:Publication)
+RETURN g, r1, t, r2, p, r3, d, r4, pub LIMIT 10
+  """
+
 )
 
 
@@ -113,20 +165,20 @@ class Text2CypherAgent:
         self.schema_json = get_schema()
         self.schema_str = json.dumps(self.schema_json, indent=2)
         self.hints = get_schema_hints() 
-        raw_schema = load_schema_once()
-        schema_summary = compress_schema(raw_schema)
-        schema_prompt = build_schema_prompt(schema_summary)
+        # raw_schema = load_schema_once()
+        # schema_summary = compress_schema(raw_schema)
+        # schema_prompt = build_schema_prompt(schema_summary)
 
-        system_prompt = SYSTEM_RULES + "\n" + schema_prompt
+        #system_prompt = SYSTEM_RULES + "\n" + schema_prompt
 
         
         # Build system prompt with schema and optional hints
-        #whole_schema = self.schema_str.replace('{', '{{').replace('}', '}}')
-        #system_prompt = SYSTEM_RULES + "\n### Schema\n" + whole_schema
+        whole_schema = self.schema_str.replace('{', '{{').replace('}', '}}')
+        system_prompt = SYSTEM_RULES + "\n### Schema\n" + whole_schema
         
-        #if self.hints:
-        #    hints_str = json.dumps(self.hints, indent=2).replace('{', '{{').replace('}', '}}')
-        #    system_prompt += "\n\n### Schema Hints\n" + hints_str
+        if self.hints:
+           hints_str = json.dumps(self.hints, indent=2).replace('{', '{{').replace('}', '}}')
+           system_prompt += "\n\n### Schema Hints\n" + hints_str
 
         self.llm = make_llm(provider)
         self.session_id = "shared"  # All agents use same session for shared history

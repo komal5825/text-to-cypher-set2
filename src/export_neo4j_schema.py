@@ -66,98 +66,191 @@ def main():
     out_path = output_dir / "neo4j_schema.json"
     out_path.write_text(json.dumps(schema, indent=2, sort_keys=True))
     print(f"Schema dumped → {out_path}")
-
+    
 def get_node_schema(session):
     print("node schema function entered")
-    """
-    Return a dict[label -> {property -> type}] that includes *all* labels,
-    even when no nodes for that label currently store properties.
-    """
-    # 1) gather property definitions
+
     q_props = """
     CALL db.schema.nodeTypeProperties()
     YIELD nodeType, propertyName, propertyTypes
-    RETURN nodeType, propertyName, propertyTypes
+    WHERE nodeType IN [
+      ":`Gene`",
+      ":`Protein`",
+      ":`Transcript`",
+      ":`Disease`",
+      ":`Drug`",
+      ":`Publication`"
+    ]
+    RETURN nodeType, propertyName, propertyTypes ;
     """
+
     schema: dict[str, dict[str, str]] = {}
+
     for rec in session.run(q_props):
         label = rec["nodeType"].strip(":`")
         prop  = rec["propertyName"]
         types_list = rec["propertyTypes"] or []
         types = ", ".join(types_list) if types_list else "Unknown"
         schema.setdefault(label, {})[prop] = types
-
-    # 2) make sure labels with *no* properties are still represented
-    q_labels = "CALL db.labels() YIELD label RETURN label"
-    for rec in session.run(q_labels):
-        label = rec["label"]
-        schema.setdefault(label, {})  # leave value dict empty
-        print("label added to schema:")
+        
+    print("Labels added to schema:")
 
     return schema
-# def get_node_schema(session):
-#     print("Entering into get_node_schema")
-#     return {rec["label"]: {} for rec in session.run("CALL db.labels() YIELD label RETURN label")}
 
 
 def get_relationship_schema(session):
+    print("relationship schema function entered")
     rel_schema = {}
 
     q = """
     CALL apoc.meta.schema()
     YIELD value
-    RETURN value
+    WITH value
+    UNWIND keys(value) AS nodeLabel
+    WITH nodeLabel, value[nodeLabel] AS nodeMeta
+    WHERE nodeMeta.type = "node"
+      AND nodeLabel IN [
+        "Gene","Protein","Transcript","Disease","Drug","Publication"
+      ]
+    UNWIND keys(nodeMeta.relationships) AS relType
+    WITH
+      relType,
+      nodeLabel AS sourceLabel,
+      nodeMeta.relationships[relType] AS rmeta
+    UNWIND rmeta.labels AS targetLabel
+    WITH
+      relType,
+      sourceLabel,
+      rmeta.direction AS direction,
+      targetLabel
+    WHERE targetLabel IN [
+      "Gene","Protein","Transcript","Disease","Drug","Publication"
+    ]
+    RETURN DISTINCT
+      relType AS relationshipType,
+      CASE direction
+        WHEN "out" THEN sourceLabel
+        ELSE targetLabel
+      END AS startLabel,
+      CASE direction
+        WHEN "out" THEN targetLabel
+        ELSE sourceLabel
+      END AS endLabel
+    ORDER BY relationshipType
     """
 
     result = session.run(q, timeout=10)
-    schema = result.single()["value"]
-    result.consume()
 
-    for name, meta in schema.items():
-        if meta.get("type") != "relationship":
-            continue
+    for rec in result:
+        rel_type = rec["relationshipType"]
+        start = rec["startLabel"]
+        end = rec["endLabel"]
 
-        # endpoints
-        # src and tgt are lists; take first element, starting with "Unknown" if empty, just in case
-        src = meta.get("start", ["Unknown"])
-        tgt = meta.get("end", ["Unknown"])
-        #rel_schema[name] gives access to the dictionary for that relationship type
-        rel_schema[name] = {
-            "_endpoints": [src[0], tgt[0]]
+        rel_schema[rel_type] = {
+            "_endpoints": [start, end]
         }
 
-        # properties
-        props = meta.get("properties", {})
-        for prop, prop_meta in props.items():
-            neo4j_type = prop_meta.get("type")
-            rel_schema[name][prop] = map_types([neo4j_type]) 
-            
-            # -------- ADD THIS BLOCK (endpoint reconstruction) --------
-    for node_label, meta in schema.items():
-        # skip relationship entries
-        if meta.get("type") == "relationship":
-            continue
-
-        rels = meta.get("relationships", {})
-        for rel, rmeta in rels.items():
-            if rel not in rel_schema:
-                continue
-
-            direction = rmeta.get("direction")
-            labels = rmeta.get("labels", [])
-
-            if not labels:
-                continue
-
-            other = labels[0]
-
-            if direction == "out":
-                rel_schema[rel]["_endpoints"] = [node_label, other]
-            elif direction == "in":
-                rel_schema[rel]["_endpoints"] = [other, node_label]
-
-
+    result.consume()
+    
     return rel_schema
+
+
+if __name__ == "__main__":
+    main()
+    
+    
+# def get_node_schema(session):
+#     print("node schema function entered")
+#     """
+#     Return a dict[label -> {property -> type}] that includes *all* labels,
+#     even when no nodes for that label currently store properties.
+#     """
+#     # 1) gather property definitions
+#     q_props = """
+#     CALL db.schema.nodeTypeProperties()
+#     YIELD nodeType, propertyName, propertyTypes
+#     RETURN nodeType, propertyName, propertyTypes
+#     """
+#     schema: dict[str, dict[str, str]] = {}
+#     for rec in session.run(q_props):
+#         label = rec["nodeType"].strip(":`")
+#         prop  = rec["propertyName"]
+#         types_list = rec["propertyTypes"] or []
+#         types = ", ".join(types_list) if types_list else "Unknown"
+#         schema.setdefault(label, {})[prop] = types
+
+#     # 2) make sure labels with *no* properties are still represented
+#     q_labels = "CALL db.labels() YIELD label RETURN label"
+#     for rec in session.run(q_labels):
+#         label = rec["label"]
+#         schema.setdefault(label, {})  # leave value dict empty
+#         print("label added to schema:")
+
+#     return schema
+
+# def get_node_schema(session):
+#     print("Entering into get_node_schema")
+#     return {rec["label"]: {} for rec in session.run("CALL db.labels() YIELD label RETURN label")}
+
+
+# def get_relationship_schema(session):
+#     rel_schema = {}
+
+#     q = """
+#     CALL apoc.meta.schema()
+#     YIELD value
+#     RETURN value
+#     """
+
+#     result = session.run(q, timeout=10)
+#     schema = result.single()["value"]
+#     result.consume()
+
+#     for name, meta in schema.items():
+#         if meta.get("type") != "relationship":
+#             continue
+
+#         # endpoints
+#         # src and tgt are lists; take first element, starting with "Unknown" if empty, just in case
+#         src = meta.get("start", ["Unknown"])
+#         tgt = meta.get("end", ["Unknown"])
+#         #rel_schema[name] gives access to the dictionary for that relationship type
+#         rel_schema[name] = {
+#             "_endpoints": [src[0], tgt[0]]
+#         }
+
+#         # properties
+#         props = meta.get("properties", {})
+#         for prop, prop_meta in props.items():
+#             neo4j_type = prop_meta.get("type")
+#             rel_schema[name][prop] = map_types([neo4j_type]) 
+            
+#             # -------- ADD THIS BLOCK (endpoint reconstruction) --------
+#     for node_label, meta in schema.items():
+#         # skip relationship entries
+#         if meta.get("type") == "relationship":
+#             continue
+
+#         rels = meta.get("relationships", {})
+#         for rel, rmeta in rels.items():
+#             if rel not in rel_schema:
+#                 continue
+
+#             direction = rmeta.get("direction")
+#             labels = rmeta.get("labels", [])
+
+#             if not labels:
+#                 continue
+
+#             other = labels[0]
+
+#             if direction == "out":
+#                 rel_schema[rel]["_endpoints"] = [node_label, other]
+#             elif direction == "in":
+#                 rel_schema[rel]["_endpoints"] = [other, node_label]
+
+
+#     return rel_schema
 
 
 ''' 
@@ -240,5 +333,3 @@ def get_relationship_schema(session):
 
 
 
-if __name__ == "__main__":
-    main()

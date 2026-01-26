@@ -1,84 +1,5 @@
 {
   "NodeTypes": {
-    "Amino_acid_sequence": {
-      "header": "String",
-      "id": "String",
-      "sequence": "String",
-      "size": "String",
-      "source": "String"
-    },
-    "Analytical_sample": {
-      "batch": "Long",
-      "external_id": "String",
-      "group": "String",
-      "group2": "String",
-      "id": "String"
-    },
-    "Biological_process": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Biological_sample": {
-      "external_id": "String",
-      "id": "String"
-    },
-    "Cellular_component": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Chromosome": {
-      "id": "String",
-      "name": "String",
-      "taxid": "String"
-    },
-    "ClinicalDisease": {
-      "created": "DateTime",
-      "embedding": "DoubleArray",
-      "group_id_bert": "String",
-      "group_name_bert": "String",
-      "mayo_causes": "String",
-      "mayo_complications": "String",
-      "mayo_prevention": "String",
-      "mayo_risk_factors": "String",
-      "mayo_see_doc": "String",
-      "mayo_symptoms": "String",
-      "mondo_definition": "String",
-      "mondo_id": "String",
-      "name": "String",
-      "node_index": "Double",
-      "orphanet_clinical_description": "String",
-      "orphanet_definition": "String",
-      "orphanet_epidemiology": "String",
-      "orphanet_management": "String",
-      "orphanet_prevalence": "String",
-      "source": "String",
-      "umls_description": "String"
-    },
-    "Clinical_variable": {},
-    "Clinically_relevant_variant": {
-      "alternative": "String",
-      "alternative_names": "String",
-      "chromosome": "String",
-      "effect": "String",
-      "id": "String",
-      "oncogeneicity": "String",
-      "position": "Long",
-      "reference": "String",
-      "source": "String"
-    },
-    "Complex": {
-      "id": "String",
-      "name": "String",
-      "organism": "String",
-      "source": "String",
-      "synonyms": "StringArray"
-    },
     "Disease": {
       "clinical_data_updated": "DateTime",
       "clinical_node_index": "Double",
@@ -108,11 +29,6 @@
       "type": "String",
       "umls_description": "String"
     },
-    "DiseaseGroup": {
-      "created": "DateTime",
-      "id": "String",
-      "name": "String"
-    },
     "Drug": {
       "atc_1": "String",
       "atc_2": "String",
@@ -136,129 +52,12 @@
       "state": "String",
       "tpsa": "Double"
     },
-    "Experiment": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Experimental_factor": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Food": {
-      "description": "String",
-      "group": "String",
-      "id": "String",
-      "name": "String",
-      "scientific_name": "String",
-      "source": "String",
-      "subgroup": "String"
-    },
-    "Functional_region": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "source": "String"
-    },
-    "GWAS_study": {
-      "date": "String",
-      "id": "String",
-      "replication_size": "String",
-      "sample_size": "String",
-      "title": "String",
-      "trait": "String"
-    },
     "Gene": {
       "family": "String",
       "id": "String",
       "name": "String",
       "synonyms": "StringArray",
       "taxid": "String"
-    },
-    "Known_variant": {
-      "alternative_names": "String",
-      "clinical_relevance": "String",
-      "disease": "String",
-      "effect": "String",
-      "external_id": "String",
-      "id": "String",
-      "original_source": "String",
-      "pvariant_id": "String",
-      "source": "String"
-    },
-    "Metabolite": {
-      "average_molecular_weight": "String",
-      "chebi_id": "String",
-      "chemical_formula": "String",
-      "class": "String",
-      "description": "String",
-      "direct_parent": "String",
-      "id": "String",
-      "kingdom": "String",
-      "name": "String",
-      "pubchem_compound_id": "String",
-      "sub_class": "String",
-      "super_class": "String",
-      "synonyms": "String"
-    },
-    "Modification": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Modified_protein": {
-      "id": "String",
-      "position": "String",
-      "protein": "String",
-      "residue": "String",
-      "sequence_window": "String",
-      "source": "String"
-    },
-    "Molecular_function": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Pathway": {
-      "description": "String",
-      "id": "String",
-      "linkout": "String",
-      "name": "String",
-      "organism": "String",
-      "source": "String"
-    },
-    "Peptide": {
-      "id": "String",
-      "type": "String",
-      "unique": "String"
-    },
-    "Phenotype": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "Project": {
-      "acronym": "String",
-      "description": "String",
-      "disease": "String",
-      "id": "String",
-      "internal_id": "String",
-      "name": "String",
-      "participant": "String",
-      "responsible": "String",
-      "tissue": "String",
-      "type": "String"
     },
     "Protein": {
       "accession": "String",
@@ -267,11 +66,6 @@
       "name": "String",
       "synonyms": "StringArray",
       "taxid": "String"
-    },
-    "Protein_structure": {
-      "id": "String",
-      "link": "String",
-      "source": "String"
     },
     "Publication": {
       "DOI": "String",
@@ -284,45 +78,12 @@
       "volume": "String",
       "year": "Long"
     },
-    "Subject": {
-      "external_id": "String",
-      "id": "String"
-    },
-    "Timepoint": {},
-    "Tissue": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
     "Transcript": {
       "assembly": "String",
       "class": "String",
       "id": "String",
       "name": "String",
       "taxid": "String"
-    },
-    "Units": {
-      "description": "String",
-      "id": "String",
-      "name": "String",
-      "synonyms": "StringArray",
-      "type": "String"
-    },
-    "User": {
-      "acronym": "String",
-      "affiliation": "String",
-      "email": "String",
-      "expiration_date": "LocalDateTime, String",
-      "id": "String",
-      "image": "String",
-      "name": "String",
-      "password": "String",
-      "phone_number": "String",
-      "rolename": "String",
-      "secondary_email": "String",
-      "username": "String"
     }
   },
   "RelationshipTypes": {
@@ -330,272 +91,49 @@
       "_endpoints": [
         "Protein",
         "Protein"
-      ],
-      "action": "STRING",
-      "directionality": "BOOLEAN",
-      "score": "FLOAT",
-      "source": "STRING"
-    },
-    "ANNOTATED_IN_PATHWAY": {
-      "_endpoints": [
-        "Protein",
-        "Pathway"
-      ],
-      "cellular_component": "STRING",
-      "evidence": "STRING",
-      "organism": "STRING",
-      "source": "STRING"
-    },
-    "ASSOCIATED_WITH": {
-      "_endpoints": [
-        "Protein",
-        "Molecular_function"
-      ],
-      "evidence_type": "STRING",
-      "number_publications": "STRING",
-      "score": "FLOAT",
-      "source": "STRING"
-    },
-    "BELONGS_TO_GROUP": {
-      "_endpoints": [
-        "ClinicalDisease",
-        "DiseaseGroup"
-      ]
-    },
-    "BELONGS_TO_PROTEIN": {
-      "_endpoints": [
-        "Peptide",
-        "Protein"
-      ],
-      "source": "STRING"
-    },
-    "BELONGS_TO_SUBJECT": {
-      "_endpoints": [
-        "Biological_sample",
-        "Subject"
       ]
     },
     "COMPILED_INTERACTS_WITH": {
       "_endpoints": [
         "Protein",
         "Protein"
-      ],
-      "evidence": "LIST",
-      "interaction_type": "STRING",
-      "score": "FLOAT",
-      "scores": "LIST",
-      "source": "LIST"
-    },
-    "CURATED_AFFECTS_INTERACTION_WITH": {
-      "_endpoints": [
-        "Unknown",
-        "Unknown"
       ]
     },
     "CURATED_INTERACTS_WITH": {
       "_endpoints": [
         "Protein",
         "Protein"
-      ],
-      "evidence": "LIST",
-      "interaction_type": "STRING",
-      "method": "LIST",
-      "score": "FLOAT",
-      "source": "LIST"
+      ]
     },
     "DETECTED_IN_PATHOLOGY_SAMPLE": {
       "_endpoints": [
         "Protein",
         "Disease"
-      ],
-      "expression_high": "STRING",
-      "expression_low": "STRING",
-      "expression_medium": "STRING",
-      "linkout": "STRING",
-      "negative_prognosis_logrank_pvalue": "STRING",
-      "not_detected": "STRING",
-      "positive_prognosis_logrank_pvalue": "STRING",
-      "source": "STRING"
-    },
-    "FOUND_IN_PROTEIN": {
-      "_endpoints": [
-        "Functional_region",
-        "Protein"
-      ],
-      "alignment": "STRING",
-      "end": "STRING",
-      "source": "STRING",
-      "start": "STRING"
-    },
-    "HAS_ENROLLED": {
-      "_endpoints": [
-        "Project",
-        "Subject"
-      ]
-    },
-    "HAS_MODIFICATION": {
-      "_endpoints": [
-        "Modified_protein",
-        "Modification"
-      ],
-      "source": "STRING"
-    },
-    "HAS_MODIFIED_SITE": {
-      "_endpoints": [
-        "Protein",
-        "Modified_protein"
       ]
     },
     "HAS_PARENT": {
       "_endpoints": [
-        "Molecular_function",
-        "Molecular_function"
+        "Disease",
+        "Disease"
       ]
-    },
-    "HAS_QUANTIFIED_MODIFIED_PROTEIN": {
-      "_endpoints": [
-        "Analytical_sample",
-        "Modified_protein"
-      ],
-      "deltaScore": "STRING",
-      "is_razor": "STRING",
-      "localizationProb": "STRING",
-      "score": "STRING",
-      "scoreLocalization": "STRING",
-      "sequenceWindow": "STRING",
-      "value": "FLOAT"
-    },
-    "HAS_QUANTIFIED_PROTEIN": {
-      "_endpoints": [
-        "Analytical_sample",
-        "Protein"
-      ],
-      "intensity": "FLOAT",
-      "is_razor": "STRING",
-      "proteinGroup": "STRING",
-      "qvalue": "FLOAT",
-      "score": "FLOAT",
-      "value": "FLOAT"
-    },
-    "HAS_SEQUENCE": {
-      "_endpoints": [
-        "Protein",
-        "Amino_acid_sequence"
-      ],
-      "source": "STRING"
-    },
-    "HAS_STRUCTURE": {
-      "_endpoints": [
-        "Protein",
-        "Protein_structure"
-      ],
-      "source": "STRING"
     },
     "INTERACTS_WITH": {
       "_endpoints": [
         "Drug",
         "Protein"
-      ],
-      "interaction_type": "STRING",
-      "relation_type": "STRING"
+      ]
     },
     "IS_BIOMARKER_OF_DISEASE": {
       "_endpoints": [
-        "Unknown",
-        "Unknown"
-      ]
-    },
-    "IS_QCMARKER_IN_TISSUE": {
-      "_endpoints": [
         "Protein",
-        "Tissue"
-      ],
-      "class": "STRING"
-    },
-    "IS_RESPONSIBLE": {
-      "_endpoints": [
-        "User",
-        "Project"
-      ]
-    },
-    "IS_SUBSTRATE_OF": {
-      "_endpoints": [
-        "Modified_protein",
-        "Protein"
-      ],
-      "evidence_type": "STRING",
-      "regulation": "STRING",
-      "score": "FLOAT",
-      "source": "STRING"
-    },
-    "IS_SUBUNIT_OF": {
-      "_endpoints": [
-        "Protein",
-        "Complex"
-      ],
-      "cell_lines": "LIST",
-      "evidences": "LIST",
-      "publication": "STRING",
-      "source": "STRING"
-    },
-    "LOCATED_IN": {
-      "_endpoints": [
-        "Transcript",
-        "Chromosome"
-      ],
-      "end": "STRING",
-      "start": "STRING",
-      "strand": "STRING"
-    },
-    "MAPS_TO": {
-      "_endpoints": [
-        "Experimental_factor",
         "Disease"
       ]
     },
     "MENTIONED_IN_PUBLICATION": {
       "_endpoints": [
-        "Modified_protein",
-        "Publication"
-      ],
-      "source": "STRING"
-    },
-    "PARTICIPATES_IN": {
-      "_endpoints": [
-        "User",
-        "Project"
-      ]
-    },
-    "PUBLISHED_IN": {
-      "_endpoints": [
-        "GWAS_study",
+        "Disease",
         "Publication"
       ]
-    },
-    "SPLITTED_INTO": {
-      "_endpoints": [
-        "Biological_sample",
-        "Analytical_sample"
-      ]
-    },
-    "STUDIES_DISEASE": {
-      "_endpoints": [
-        "Project",
-        "Disease"
-      ]
-    },
-    "STUDIES_TISSUE": {
-      "_endpoints": [
-        "Project",
-        "Tissue"
-      ]
-    },
-    "STUDIES_TRAIT": {
-      "_endpoints": [
-        "GWAS_study",
-        "Experimental_factor"
-      ],
-      "source": "STRING"
     },
     "TRANSCRIBED_INTO": {
       "_endpoints": [
@@ -612,44 +150,7 @@
     "TREATS": {
       "_endpoints": [
         "Drug",
-        "ClinicalDisease"
-      ],
-      "display_relation": "STRING",
-      "relation_type": "STRING"
-    },
-    "VARIANT_FOUND_IN_CHROMOSOME": {
-      "_endpoints": [
-        "Known_variant",
-        "Chromosome"
-      ]
-    },
-    "VARIANT_FOUND_IN_GENE": {
-      "_endpoints": [
-        "Known_variant",
-        "Gene"
-      ]
-    },
-    "VARIANT_FOUND_IN_GWAS": {
-      "_endpoints": [
-        "Known_variant",
-        "GWAS_study"
-      ],
-      "frequency": "STRING",
-      "odds_ratio": "STRING",
-      "pvalue": "STRING",
-      "source": "STRING",
-      "trait": "STRING"
-    },
-    "VARIANT_FOUND_IN_PROTEIN": {
-      "_endpoints": [
-        "Known_variant",
-        "Protein"
-      ]
-    },
-    "VARIANT_IS_CLINICALLY_RELEVANT": {
-      "_endpoints": [
-        "Unknown",
-        "Unknown"
+        "Disease"
       ]
     }
   }
