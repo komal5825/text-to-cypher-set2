@@ -118,7 +118,7 @@ LLMs can only “see” the schema you expose, so a precise, self‑describing g
 | **6** | **Document required vs optional properties** (table or JSON) | Gives both humans *and* the model a ground truth for projection. |
 | **7** | **Be ruthlessly consistent** – once you pick a style, never mix alternatives | Consistency is the strongest signal the LLM gets.  [oai_citation_attribution:5‡Neo4j](https://neo4j.com/docs/cypher-manual/current/syntax/naming/?utm_source=chatgpt.com) |
 
-> **Bottom line** – if a new teammate can understand your graph without extra docs, an LLM probably can too.
-=======
-# text-to-cypher
+**Bottom line** – if a new teammate can understand your graph without extra docs, an LLM probably can too.
+
+
 
