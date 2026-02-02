@@ -79,7 +79,13 @@ def get_node_schema(session):
       ":`Transcript`",
       ":`Disease`",
       ":`Drug`",
-      ":`Publication`"
+      ":`Publication`" ,
+      ":`Pathway`",
+      ":`Metabolite`",
+      ":`Tissue`",
+      ":`Modified_Protein`",
+      ":`Protein_Structure`"
+      
     ]
     RETURN nodeType, propertyName, propertyTypes ;
     """
@@ -110,7 +116,11 @@ def get_relationship_schema(session):
     WITH nodeLabel, value[nodeLabel] AS nodeMeta
     WHERE nodeMeta.type = "node"
       AND nodeLabel IN [
-        "Gene","Protein","Transcript","Disease","Drug","Publication"
+        "Gene","Protein","Transcript","Disease","Drug","Publication" ,"Pathway",
+      "Metabolite",
+      "Tissue",
+      "Modified_Protein",
+      "Protein_Structure"
       ]
     UNWIND keys(nodeMeta.relationships) AS relType
     WITH
@@ -124,7 +134,11 @@ def get_relationship_schema(session):
       rmeta.direction AS direction,
       targetLabel
     WHERE targetLabel IN [
-      "Gene","Protein","Transcript","Disease","Drug","Publication"
+      "Gene","Protein","Transcript","Disease","Drug","Publication" ,"Pathway",
+      "Metabolite",
+      "Tissue",
+      "Modified_Protein",
+      "Protein_Structure"
     ]
     RETURN DISTINCT
       relType AS relationshipType,

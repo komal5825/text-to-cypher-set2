@@ -59,6 +59,29 @@
       "synonyms": "StringArray",
       "taxid": "String"
     },
+    "Metabolite": {
+      "average_molecular_weight": "String",
+      "chebi_id": "String",
+      "chemical_formula": "String",
+      "class": "String",
+      "description": "String",
+      "direct_parent": "String",
+      "id": "String",
+      "kingdom": "String",
+      "name": "String",
+      "pubchem_compound_id": "String",
+      "sub_class": "String",
+      "super_class": "String",
+      "synonyms": "String"
+    },
+    "Pathway": {
+      "description": "String",
+      "id": "String",
+      "linkout": "String",
+      "name": "String",
+      "organism": "String",
+      "source": "String"
+    },
     "Protein": {
       "accession": "String",
       "embedding": "DoubleArray",
@@ -78,6 +101,13 @@
       "volume": "String",
       "year": "Long"
     },
+    "Tissue": {
+      "description": "String",
+      "id": "String",
+      "name": "String",
+      "synonyms": "StringArray",
+      "type": "String"
+    },
     "Transcript": {
       "assembly": "String",
       "class": "String",
@@ -91,6 +121,18 @@
       "_endpoints": [
         "Protein",
         "Protein"
+      ]
+    },
+    "ANNOTATED_IN_PATHWAY": {
+      "_endpoints": [
+        "Protein",
+        "Pathway"
+      ]
+    },
+    "ASSOCIATED_WITH": {
+      "_endpoints": [
+        "Protein",
+        "Tissue"
       ]
     },
     "COMPILED_INTERACTS_WITH": {
@@ -113,8 +155,8 @@
     },
     "HAS_PARENT": {
       "_endpoints": [
-        "Disease",
-        "Disease"
+        "Tissue",
+        "Tissue"
       ]
     },
     "INTERACTS_WITH": {
@@ -123,15 +165,9 @@
         "Protein"
       ]
     },
-    "IS_BIOMARKER_OF_DISEASE": {
-      "_endpoints": [
-        "Protein",
-        "Disease"
-      ]
-    },
     "MENTIONED_IN_PUBLICATION": {
       "_endpoints": [
-        "Disease",
+        "Protein",
         "Publication"
       ]
     },

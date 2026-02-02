@@ -1,17 +1,32 @@
 {
   "relationships": {
-    "ACTS_ON" : "Protein interacts with Protein",
-    "COMPILED_INTERACTS_WITH": "Protein interacts with Protein",
-    "CURATED_INTERACTS_WITH": "Protein interacts with Protein",
-    "DETECTED_IN_PATHOLOGY_SAMPLE": "Protein detected in Disease",
-    "HAS_PARENT": "Disease has parent Disease",
-    "INTERACTS_WITH": "Drug interacts with Protein",
-    "IS_BIOMARKER_OF_DISEASE": "Protein is biomarker of Disease",
-    "MENTIONED_IN_PUBLICATION": "Disease mentioned in Publication",
-    "TRANSCRIBED_INTO" : "Gene transcribed into Transcript",
-    "TRANSLATED_INTO": "Gene translated into Protein",
-    "TREATS": "Drug treats Disease"
-    
+  "ACTS_ON": "Protein acts on Protein",
+  "ANNOTATED_IN_PATHWAY": "Protein is annotated in Pathway",
+  "ANNOTATED_IN_PATHWAY_METABOLITE": "Metabolite is annotated in Pathway",
+  "ASSOCIATED_WITH_METABOLITE_DISEASE": "Metabolite is associated with Disease",
+  "ASSOCIATED_WITH_METABOLITE_PROTEIN": "Metabolite is associated with Protein",
+  "ASSOCIATED_WITH_PROTEIN_DISEASE": "Protein is associated with Disease",
+  "ASSOCIATED_WITH_PROTEIN_TISSUE": "Protein is associated with Tissue",
+  "COMPILED_INTERACTS_WITH": "Protein interacts with Protein",
+  "CURATED_INTERACTS_WITH": "Protein interacts with Protein",
+  "DETECTED_IN_PATHOLOGY_SAMPLE": "Protein detected in Disease",
+  "HAS_MODIFIED_SITE": "Protein has modified protein site",
+  "HAS_PARENT_DISEASE": "Disease has parent Disease",
+  "HAS_PARENT_TISSUE": "Tissue has parent Tissue",
+  "HAS_STRUCTURE": "Protein has protein structure",
+  "INTERACTS_WITH": "Drug interacts with Protein",
+  "IS_BIOMARKER_OF_DISEASE": "Protein is biomarker of Disease",
+  "IS_QCMARKER_IN_TISSUE": "Protein is quality control marker in Tissue",
+  "IS_SUBSTRATE_OF": "Modified protein is substrate of Protein",
+  "MENTIONED_IN_PUBLICATION_DISEASE": "Disease mentioned in Publication",
+  "MENTIONED_IN_PUBLICATION_MODIFIED_PROTEIN": "Modified protein mentioned in Publication",
+  "MENTIONED_IN_PUBLICATION_PROTEIN": "Protein mentioned in Publication",
+  "MENTIONED_IN_PUBLICATION_TISSUE": "Tissue mentioned in Publication",
+  "TREATS": "Drug treats Disease",
+  "TRANSCRIBED_INTO": "Gene transcribed into Transcript",
+  "TRANSLATED_INTO_GENE": "Gene translated into Protein",
+  "TRANSLATED_INTO_TRANSCRIPT": "Transcript translated into Protein"
+
   }
 }
   
