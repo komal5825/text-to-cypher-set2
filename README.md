@@ -1,13 +1,6 @@
+
 # text-to-cypher
 
-[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vue.js](https://img.shields.io/badge/Vue.js-3-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Neo4j](https://img.shields.io/badge/Neo4j-Database-008CC1?logo=neo4j&logoColor=white)](https://neo4j.com/)
-[![OpenAI](https://img.shields.io/badge/GPT--5-mini-412991?logo=openai&logoColor=white)](https://openai.com/)
-[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Lightweight AI agent converting natural language to Neo4j Cypher.
 
@@ -126,3 +119,6 @@ LLMs can only “see” the schema you expose, so a precise, self‑describing g
 | **7** | **Be ruthlessly consistent** – once you pick a style, never mix alternatives | Consistency is the strongest signal the LLM gets.  [oai_citation_attribution:5‡Neo4j](https://neo4j.com/docs/cypher-manual/current/syntax/naming/?utm_source=chatgpt.com) |
 
 > **Bottom line** – if a new teammate can understand your graph without extra docs, an LLM probably can too.
+=======
+# text-to-cypher
+
