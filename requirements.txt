@@ -1,0 +1,12 @@
+openai
+langchain
+langchain-openai
+langchain-community
+neo4j
+pydantic
+python-dotenv
+fastapi
+uvicorn
+loguru
+tiktoken
+tenacity

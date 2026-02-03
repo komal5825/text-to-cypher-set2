@@ -25,7 +25,7 @@
   "TREATS": "Drug treats Disease",
   "TRANSCRIBED_INTO": "Gene transcribed into Transcript",
   "TRANSLATED_INTO_GENE": "Gene translated into Protein",
-  "TRANSLATED_INTO_TRANSCRIPT": "Transcript translated into Protein"
+  "TRANSLATED_INTO": "Transcript translated into Protein"
 
   }
 }

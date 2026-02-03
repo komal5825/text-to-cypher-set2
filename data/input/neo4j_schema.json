@@ -165,6 +165,18 @@
         "Protein"
       ]
     },
+    "IS_BIOMARKER_OF_DISEASE": {
+      "_endpoints": [
+        "Protein",
+        "Disease"
+      ]
+    },
+     "IS_QCMARKER_IN_TISSUE": {
+      "_endpoints": [
+        "Protein",
+        "Tissue"
+      ]
+    },
     "MENTIONED_IN_PUBLICATION": {
       "_endpoints": [
         "Protein",
