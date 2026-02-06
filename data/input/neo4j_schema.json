@@ -116,90 +116,117 @@
       "taxid": "String"
     }
   },
-  "RelationshipTypes": {
-    "ACTS_ON": {
-      "_endpoints": [
-        "Protein",
-        "Protein"
-      ]
-    },
-    "ANNOTATED_IN_PATHWAY": {
-      "_endpoints": [
-        "Protein",
-        "Pathway"
-      ]
-    },
-    "ASSOCIATED_WITH": {
-      "_endpoints": [
-        "Protein",
-        "Tissue"
-      ]
-    },
-    "COMPILED_INTERACTS_WITH": {
-      "_endpoints": [
-        "Protein",
-        "Protein"
-      ]
-    },
-    "CURATED_INTERACTS_WITH": {
-      "_endpoints": [
-        "Protein",
-        "Protein"
-      ]
-    },
-    "DETECTED_IN_PATHOLOGY_SAMPLE": {
-      "_endpoints": [
-        "Protein",
-        "Disease"
-      ]
-    },
-    "HAS_PARENT": {
-      "_endpoints": [
-        "Tissue",
-        "Tissue"
-      ]
-    },
-    "INTERACTS_WITH": {
-      "_endpoints": [
-        "Drug",
-        "Protein"
-      ]
-    },
-    "IS_BIOMARKER_OF_DISEASE": {
-      "_endpoints": [
-        "Protein",
-        "Disease"
-      ]
-    },
-     "IS_QCMARKER_IN_TISSUE": {
-      "_endpoints": [
-        "Protein",
-        "Tissue"
-      ]
-    },
-    "MENTIONED_IN_PUBLICATION": {
-      "_endpoints": [
-        "Protein",
-        "Publication"
-      ]
-    },
-    "TRANSCRIBED_INTO": {
-      "_endpoints": [
-        "Gene",
-        "Transcript"
-      ]
-    },
-    "TRANSLATED_INTO": {
-      "_endpoints": [
-        "Transcript",
-        "Protein"
-      ]
-    },
-    "TREATS": {
-      "_endpoints": [
-        "Drug",
-        "Disease"
-      ]
-    }
+  "RelationshipTypes": 
+    {
+  "ACTS_ON": {
+    "_pairs": [
+      { "from": "Protein", "to": "Protein" }
+    ]
+  },
+
+  "ANNOTATED_IN_PATHWAY": {
+    "_pairs": [
+      { "from": "Metabolite", "to": "Pathway" },
+      { "from": "Protein", "to": "Pathway" }
+    ]
+  },
+
+  "ASSOCIATED_WITH": {
+    "_pairs": [
+      { "from": "Metabolite", "to": "Disease" },
+      { "from": "Metabolite", "to": "Protein" },
+      { "from": "Protein", "to": "Disease" },
+      { "from": "Protein", "to": "Tissue" }
+    ]
+  },
+
+  "COMPILED_INTERACTS_WITH": {
+    "_pairs": [
+      { "from": "Protein", "to": "Protein" }
+    ]
+  },
+
+  "CURATED_INTERACTS_WITH": {
+    "_pairs": [
+      { "from": "Protein", "to": "Protein" }
+    ]
+  },
+
+  "DETECTED_IN_PATHOLOGY_SAMPLE": {
+    "_pairs": [
+      { "from": "Protein", "to": "Disease" }
+    ]
+  },
+
+  "HAS_MODIFIED_SITE": {
+    "_pairs": [
+      { "from": "Protein", "to": "Modified_protein" }
+    ]
+  },
+
+  "HAS_PARENT": {
+    "_pairs": [
+      { "from": "Disease", "to": "Disease" },
+      { "from": "Tissue", "to": "Tissue" }
+    ]
+  },
+
+  "HAS_STRUCTURE": {
+    "_pairs": [
+      { "from": "Protein", "to": "Protein_structure" }
+    ]
+  },
+
+  "INTERACTS_WITH": {
+    "_pairs": [
+      { "from": "Drug", "to": "Protein" }
+    ]
+  },
+
+  "IS_BIOMARKER_OF_DISEASE": {
+    "_pairs": [
+      { "from": "Protein", "to": "Disease" }
+    ]
+  },
+
+  "IS_QCMARKER_IN_TISSUE": {
+    "_pairs": [
+      { "from": "Protein", "to": "Tissue" }
+    ]
+  },
+
+  "IS_SUBSTRATE_OF": {
+    "_pairs": [
+      { "from": "Modified_protein", "to": "Protein" }
+    ]
+  },
+
+  "MENTIONED_IN_PUBLICATION": {
+    "_pairs": [
+      { "from": "Disease", "to": "Publication" },
+      { "from": "Modified_protein", "to": "Publication" },
+      { "from": "Protein", "to": "Publication" },
+      { "from": "Tissue", "to": "Publication" }
+    ]
+  },
+
+  "TREATS": {
+    "_pairs": [
+      { "from": "Drug", "to": "Disease" }
+    ]
+  },
+
+  "TRANSCRIBED_INTO": {
+    "_pairs": [
+      { "from": "Gene", "to": "Transcript" }
+    ]
+  },
+
+  "TRANSLATED_INTO": {
+    "_pairs": [
+      { "from": "Gene", "to": "Protein" },
+      { "from": "Transcript", "to": "Protein" }
+    ]
   }
+}
 }
